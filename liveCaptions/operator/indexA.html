@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>WOLVES</title>
+
+  <meta charset="UTF-8">
+
+  <!-- To ensure proper rendering and touch zooming on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootsatrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+  <!-- JS libraries -->
+  <script src="libs/p5.min.js"></script>
+
+  <!-- javaScript -->
+  <script src="myJavaScriptCode/p5Script.js"></script>
+
+  <!-- css style -->
+  <link rel="stylesheet" href=css/mediaScroll.css> <link rel="stylesheet" href=css/anime.css> <!-- style -->
+  <style>
+    .affix {
+      top: 0px;
+      z-index: 9999 !important;
+    }
+
+    .affix+.container-fluid {
+      padding-top: 70px;
+    }
+
+    #theAnimation {
+      position: fixed;
+      top: 250px;
+      left: 40%;
+      z-index: 10;
+    }
+  </style>
+</head>
+
+
+<body>
+  <div class="container">
+
+    <!-- Navigation bar-->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">The Wolves</a>
+      <button class="button" id="myBtn" onclick="activateCaptions()" type="button" ;>Activate Captions</button>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <div style="margin-top: 12px; font-size: 12px; color: gainsboro">Current Position</div>
+            <div style="margin-top: 0px; font-size: 12px; color: gainsboro" id="currentPosition"> 0 </div>
+          </li>
+
+          <li class="nav-item">
+            <div style="margin-top: 12px; font-size: 12px; color: gainsboro"> Current Time: </div>
+            <div style="margin-top: 0px; font-size: 12px; color: gainsboro" id="currentTime"> 0 </div>
+          </li>
+
+          <li class="nav-item">
+            <div style="margin-top: 12px; font-size: 12px; color: gainsboro"> Ellapsed Time: </div>
+            <div style="margin-top: 0px; font-size: 12px; color: gainsboro" id="ellapsedTime"> 0 </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </nav>
+  </div>
+
+
+  <div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+
+
+  <!-- First Container-->
+  <div class="container" id="section1"> <a name="a1"></a>
+    <!-- Row-->
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-sm-3">
+        <H4>Week One - The Cambodian</H4>
+
+      </div>
+      <!-- Right Column -->
+      <div class="col-sm-9">
+        <!-- Sections in right column -->
+        <section id="a1"><a name="a1"></a>
+          <section id="a1a">
+            <div id='column_A'>Void</div>
+          </section>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="overlay"></div>
+  <div id="overlay2"></div>
+  <div id="overlay3" style="top: 170px"></div>
+
+
+  <!-- Control the audio with javaScript  -->
+  <script src="myJavaScriptCode/mediaControl.js"></script>
+
+
+  <script>
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
+  </script>
+
+</body>
+
+</html>
