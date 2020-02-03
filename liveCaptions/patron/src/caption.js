@@ -26,7 +26,7 @@ class Caption {
   display() {
     this.countdown();
     if (this.visible) {
-      let string =  ">> " + this.caption;
+      let string =  this.caption;
       let boxWidth = 70;
       let txtLength = globalP5.textWidth(string);
       let txtHeight = globalP5.ceil(txtLength/ boxWidth) + 1
@@ -34,9 +34,18 @@ class Caption {
       globalP5.textAlign(globalP5.LEFT)
       globalP5.textSize(12)
       globalP5.textLeading(leading)
+      if (this.style == "normal"){
+        globalP5.textFont(fontNormal)
+      } else if (this.style == "emphasis"){
+        globalP5.textFont(fontEmphasis)
+      } else if (this.style == "yell"){
+        globalP5.textFont(fontYell)
+      }
+      globalP5.textStyle(globalP5.ITALIC)
       // display caption
       globalP5.text(string, 0, -20, boxWidth, txtHeight *  leading)
       globalP5.textAlign(globalP5.CENTER)
+      globalP5.textFont(fontNormal)
     }
   }
 
@@ -61,5 +70,9 @@ class Caption {
     this.visible = true;
     this.out = -1;
     this.remaning = 0;
+  }
+
+  setPhraseStart(){
+    this.caption = ">> " + this.caption;
   }
 }

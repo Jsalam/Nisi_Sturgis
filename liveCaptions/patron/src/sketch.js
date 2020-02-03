@@ -1,19 +1,27 @@
 
 let cam1;
 let actors = [];
-let font;
 let captions;
+let latestSpeakerID;
 let cast;
 let stage;
 let defDuration = 2000;
+
+// communication to server
 let socket;
 let lastMessage;
 let visualizeElements = false;
 let input
+// fonts
+let fontNormal;
+let fontEmphasis;
+let fontYell;
 
 function captionsApp(p5) {
   p5.preload = function () {
-    font = p5.loadFont('./fonts/Roboto-Regular.ttf')
+    fontNormal = p5.loadFont('./fonts/Roboto-Regular.ttf')
+    fontEmphasis = p5.loadFont('./fonts/Roboto-Italic.ttf')
+    fontYell = p5.loadFont('./fonts/Roboto-Bold.ttf');
   }
 
   p5.setup = function () {
@@ -55,7 +63,7 @@ function captionsApp(p5) {
     // Settings
     p5.rectMode(p5.CENTER)
     p5.imageMode(p5.CENTER)
-    p5.textFont(font)
+    p5.textFont(fontNormal)
 
     // communication
     document.getElementById("patronButton").onclick = connectAndEnable;
@@ -91,20 +99,15 @@ function connectAndEnable() {
 }
 
 
-function setIP(ip) {  
-
+function setIP(ip) {
   socket = io.connect('http://' + ip + ':3000');
-
   // receiving messages
   socket.on('message', processMessage);
 }
 
 function processMessage(data) {
-
   msg = data;
-
   if (msg.Seq !== lastMessage) {
-
     let messageCaptions = parseMessage(msg);
     for (let i = 0; i < messageCaptions.length; i++) {
       const element = messageCaptions[i];
@@ -118,9 +121,10 @@ function processMessage(data) {
 // assign this canvas to the HTML placeholder
 var globalP5 = new p5(captionsApp, "sketchHolder");
 
+/**SPlits the message in up to 4 captions returned in an array*/
 function parseMessage(msg) {
   let tempCaptions = [];
-  // one intereation for each speaker
+  // one interaction for each speaker
   for (let i = 0; i < 4; i++) {
     if (msg.speakerID_A) {
       let durationTmp = defDuration;
@@ -159,7 +163,6 @@ function parseMessage(msg) {
 }
 
 function setCaption(captionTemp) {
-
   let actorTmp;
 
   if (captionTemp) {
@@ -167,6 +170,11 @@ function setCaption(captionTemp) {
   }
 
   if (actorTmp && captionTemp) {
+    // if this is a new phrase or a continuation of a previous one
+    if (latestSpeakerID != captionTemp.speakerID){
+      captionTemp.setPhraseStart();
+      latestSpeakerID = captionTemp.speakerID;
+    }
     actorTmp.setCaption(captionTemp)
   }
 }
